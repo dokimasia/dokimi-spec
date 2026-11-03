@@ -1,0 +1,340 @@
+{
+  "ergon": "0.17.1",
+  "files": [
+    {
+      "path": ".commitlint.yaml",
+      "producer": "common",
+      "sha256": "1ac3f2b4022a18a91051f0bd8e10cfce4ed0cdff237f1c50454aeaa388c41a75"
+    },
+    {
+      "path": ".editorconfig",
+      "producer": "common",
+      "sha256": "93a89e8baecb905d0f747ee7a40918bd5ed90617dd5cf4fe147895d671411fd2"
+    },
+    {
+      "path": ".gitattributes",
+      "producer": "common",
+      "sha256": "197fef5b1d1a448d89160780d36f1f9cb206ccdc440d85b6c7be7a2a921a9f93"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/bug.yml",
+      "producer": "github",
+      "sha256": "784aebe15b8c161a37907f5a840406ebd9c0a5dd0429f4ea4dbf5cbe444ea0ab"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/config.yml",
+      "producer": "github",
+      "sha256": "a469952ae23693f2469554dedcc2bdb2a0dddb437e6badb1833e076b696d0495"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/feature.yml",
+      "producer": "github",
+      "sha256": "d4bef615f7432456c4aee578bfb274eb8aedf92728ae497f6856c3ede4bab3ca"
+    },
+    {
+      "path": ".github/PULL_REQUEST_TEMPLATE.md",
+      "producer": "github",
+      "sha256": "847a27513a667c4b096a937d209b6403718968d300cd7353a38091dd403ffb94"
+    },
+    {
+      "path": ".github/actionlint.yaml",
+      "producer": "github",
+      "sha256": "1b1fca0de871f5975557a62370b65ab114cd19c0adf2735ccba2c7947961867e"
+    },
+    {
+      "path": ".github/actions/setup-ergon/action.yml",
+      "producer": "github",
+      "sha256": "4aaa13da8da70d09dea1654946ca0badb00a13e00999eaef1a780e9230acad93"
+    },
+    {
+      "path": ".github/actions/setup-make/action.yml",
+      "producer": "github",
+      "sha256": "0adbd275abc6c40082dc58e402c8164c41050e44c46417e9f36890eae1822155"
+    },
+    {
+      "path": ".github/dependabot.yml",
+      "producer": "github",
+      "sha256": "2b2022de9d4fc916fca8d4f608db653f33791a5855786f0f4d804d9a09d391ad"
+    },
+    {
+      "path": ".github/workflows/baseline.yml",
+      "producer": "github",
+      "sha256": "ed9bddd96e5f913127d61535451cea1550d0ca0994c7f3ca411974bb67f01d15"
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "producer": "github",
+      "sha256": "f3c6dc611200c39dead228510d2b5c3d975cdc6dd1582e5eda24dc12d0e2c9dc"
+    },
+    {
+      "path": ".github/workflows/codeql.yml",
+      "producer": "github",
+      "sha256": "523c9b7e157ccbf3007c8c9aa4ace7f3ded0cd24b990df4e9a4c8651ccdedc89"
+    },
+    {
+      "path": ".github/workflows/nightly.yml",
+      "producer": "github",
+      "sha256": "aa27282a8853966dc5393d2b46901bc2250129cf1a743f20324539bbaf027349"
+    },
+    {
+      "path": ".github/workflows/release.yml",
+      "producer": "github",
+      "sha256": "1d5eddbb6be33eae308d36d58ccd5f6182ca9244b9efec6870d2b16daf6ce070"
+    },
+    {
+      "path": ".github/workflows/security.yml",
+      "producer": "github",
+      "sha256": "aea518eeab732e7efbc68957cc691bf8b4433ec6b2e690457e65fbc738248d76"
+    },
+    {
+      "path": ".github/workflows/version.yml",
+      "producer": "github",
+      "sha256": "fe2619a747204ae5c60dcbc99bca0eaf96153060634a4fd462e5f506cc0aaff6"
+    },
+    {
+      "path": ".gitignore",
+      "producer": "common",
+      "sha256": "fa0369ca6988428a798efe232d57354c3db66f5914954bbc7ca2448966b504c4"
+    },
+    {
+      "path": ".golangci.yml",
+      "producer": "go",
+      "sha256": "b2d824915cacbed6fa4e4eb7f8a06a9d5b81f6951d95fc565beafd8021127bb7"
+    },
+    {
+      "path": ".markdownlint.yml",
+      "producer": "common",
+      "sha256": "ebb529758bc8537e5e88a8772020d015d2782c80202faf274d62b8f3b62162e4"
+    },
+    {
+      "path": ".markdownlintignore",
+      "producer": "common",
+      "sha256": "cd1c6710f77a903d1a44995a27c3f52c3327b5dfb493fddf87f130ae6b0f7f1f"
+    },
+    {
+      "path": ".pre-commit-config.yaml",
+      "producer": "common",
+      "sha256": "6eac5d714a351b97a4cdf0d698c8c218c534c035d7ad967aa5bd3c952d2dc42a"
+    },
+    {
+      "path": "CODE_OF_CONDUCT.md",
+      "producer": "common",
+      "sha256": "47f8e8865bf40186d03de135629c43934f73bb1bcc0c137187dcdb69ecc6d699"
+    },
+    {
+      "path": "LICENSE",
+      "producer": "license",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    },
+    {
+      "path": "Makefile",
+      "producer": "common",
+      "sha256": "386add020a8a96dc6cb892a3a47d2ac9d3475f3dc3d4f515309fb4578ba0c3df"
+    },
+    {
+      "path": "NOTICE",
+      "producer": "license",
+      "sha256": "a9485b99ee68c524ea63f2a239c1c71a5fe7dea41bbac4f8a5c31bfe2ed85211"
+    }
+  ],
+  "settings": {
+    "common.ci.timeout": 10,
+    "common.ergon": [
+      "ergon"
+    ],
+    "common.hooks.exclude": "",
+    "common.hooks.pre-commit": [
+      "lint",
+      "test"
+    ],
+    "common.hooks.pre-push": [
+      "check"
+    ],
+    "common.pre-commit-hooks": "v6.0.0",
+    "common.tools.commitlint.sha256": {
+      "darwin/arm64": "35f25a55947031db016177ac0211d479c1fca21ccb87b368b6a429629524436c",
+      "linux/amd64": "bf9666441262bf8d31345a6d29d6f788d0dadea7d47e5b91890c3a651999c118",
+      "windows/amd64": "e8f90d08616ab8cd987b2dbef7ae0ee7fd1cb43c97f5a1ad171e8a56d1bd2f3d"
+    },
+    "common.tools.commitlint.version": "0.12.0",
+    "common.tools.rumdl.sha256": {
+      "darwin/arm64": "bc62f4176dd9257547c939fa152b535b6f393365acd352fcfd94e5e19a792bb4",
+      "linux/amd64": "6c90c398f04c11a09dcbd2da08bdaa6d53d9b14393e3cd32dbdf4da5620eec5c",
+      "windows/amd64": "72ed0bd3912560758cfc66cb439a2804755a858573e605cd3d1e65e8aa79d2a1"
+    },
+    "common.tools.rumdl.version": "0.3.0",
+    "github.ci.actions.attest.commit": "1e69f48acb82d1966a394da916b4c1698aa569d6",
+    "github.ci.actions.attest.release": "v4.2.2",
+    "github.ci.actions.attest.uses": "actions/attest",
+    "github.ci.actions.cache.commit": "55cc8345863c7cc4c66a329aec7e433d2d1c52a9",
+    "github.ci.actions.cache.release": "v6.1.0",
+    "github.ci.actions.cache.uses": "actions/cache",
+    "github.ci.actions.checkout.commit": "3d3c42e5aac5ba805825da76410c181273ba90b1",
+    "github.ci.actions.checkout.release": "v7.0.1",
+    "github.ci.actions.checkout.uses": "actions/checkout",
+    "github.ci.actions.codeql.commit": "9b3254085494b55a0f7c4c2b3d2d52cc712ce370",
+    "github.ci.actions.codeql.release": "v4.39.1",
+    "github.ci.actions.codeql.uses": "github/codeql-action",
+    "github.ci.actions.create-github-app-token.commit": "64ab729a6294000f5aa4a4bc0b73d1f32bc45510",
+    "github.ci.actions.create-github-app-token.release": "v3.3.0",
+    "github.ci.actions.create-github-app-token.uses": "actions/create-github-app-token",
+    "github.ci.actions.dependency-review.commit": "a1d282b36b6f3519aa1f3fc636f609c47dddb294",
+    "github.ci.actions.dependency-review.release": "v5.0.0",
+    "github.ci.actions.dependency-review.uses": "actions/dependency-review-action",
+    "github.ci.actions.download-artifact.commit": "9000827ccba6bdab643e8b6fd33ac0654aef8333",
+    "github.ci.actions.download-artifact.release": "v8.0.2",
+    "github.ci.actions.download-artifact.uses": "actions/download-artifact",
+    "github.ci.actions.scorecard.commit": "fa7117db83c52d787ae5a89f350999701505d78e",
+    "github.ci.actions.scorecard.release": "v2.5.0",
+    "github.ci.actions.scorecard.uses": "ossf/scorecard-action",
+    "github.ci.actions.upload-artifact.commit": "cf430e030ddbb5b0abf93d22962f4752f3646cd9",
+    "github.ci.actions.upload-artifact.release": "v7.0.2",
+    "github.ci.actions.upload-artifact.uses": "actions/upload-artifact",
+    "github.ci.timeout": 15,
+    "github.code-security": true,
+    "github.linux": "ubuntu-26.04",
+    "github.make": "4.4.1",
+    "github.nightly.schedule": "0 3 * * *",
+    "github.runners": [
+      "ubuntu-26.04",
+      "macos-26",
+      "windows-2025"
+    ],
+    "github.tools.actionlint.sha256": {
+      "darwin/arm64": "aba9ced2dee8d27fecca3dc7feb1a7f9a52caefa1eb46f3271ea66b6e0e6953f",
+      "linux/amd64": "8aca8db96f1b94770f1b0d72b6dddcb1ebb8123cb3712530b08cc387b349a3d8",
+      "windows/amd64": "6e7241b51e6817ea6a047693d8e6fed13b31819c9a0dd6c5a726e1592d22f6e9"
+    },
+    "github.tools.actionlint.version": "1.7.12",
+    "go.audit.args": [],
+    "go.bench.args": [
+      "-benchmem"
+    ],
+    "go.bench.count": 6,
+    "go.bench.match": ".",
+    "go.bench.skip": [],
+    "go.bench.time": "1s",
+    "go.binaries": [],
+    "go.check": [
+      "lint",
+      "test",
+      "race",
+      "audit"
+    ],
+    "go.ci.actions.setup-go.commit": "b7ad1dad31e06c5925ef5d2fc7ad053ef454303e",
+    "go.ci.actions.setup-go.release": "v7.0.0",
+    "go.ci.actions.setup-go.uses": "actions/setup-go",
+    "go.ci.runners": [],
+    "go.ci.steps": [],
+    "go.ci.timeout": 30,
+    "go.ci.versions": [],
+    "go.fuzz.args": [
+      "-fuzzminimizetime=5s"
+    ],
+    "go.fuzz.match": ".",
+    "go.fuzz.time": "30s",
+    "go.generate.commands": [
+      [
+        "go",
+        "generate"
+      ]
+    ],
+    "go.homebrew.tap": "",
+    "go.lint.analyzers": "go.dokimi.dev/lint/golangci@v0.2.0",
+    "go.lint.plugins": {},
+    "go.mutate.args": [],
+    "go.mutate.skip": [],
+    "go.mutate.timeout": "0s",
+    "go.mutate.workers": 1,
+    "go.nightly": {
+      "bench": 45,
+      "fuzz": 120,
+      "mutate": 60
+    },
+    "go.paths": [
+      "./..."
+    ],
+    "go.race.args": [
+      "-count=1",
+      "-p=1"
+    ],
+    "go.test.args": [
+      "-count=1"
+    ],
+    "go.tools.benchstat": "golang.org/x/perf/cmd/benchstat@v0.0.0-20261009192801-be2c69fb417e",
+    "go.tools.cosign.sha256": {
+      "darwin/amd64": "9d1e4abe2b6be279ed0d2ff706fde1ccd738747c834e3e6d44039c238867334f",
+      "darwin/arm64": "9f9b8cd557cf2e5b3df3373a00baa005a86b02391e3e06dd0ce37b3a1533d3a4",
+      "linux/amd64": "424e2c97d0b45fd7a6b608a87f090f35633f4c23ece5f092d48bba11aaf4bbfa",
+      "linux/arm64": "ade83b7aac62e131cacfe96d958948b2150cc9efec46a570a2649b8e27dedad2",
+      "windows/amd64": "cbe953787074611f1334cbf37dc1cf953995bb8c45398eb4fc7bb781d29c1f2a"
+    },
+    "go.tools.cosign.version": "3.1.4",
+    "go.tools.dokimi-mutate-go": "go.dokimi.dev/mutate/cmd/dokimi-mutate-go@v0.1.0",
+    "go.tools.golangci-lint": "github.com/golangci/golangci-lint/v2/cmd/golangci-lint@v2.15.0",
+    "go.tools.goreleaser.sha256": {
+      "darwin/amd64": "164fce297e601ec00009e40d26858789b637335b5564bff2c99027b10d28bafe",
+      "darwin/arm64": "713192b46698ac10ed9275abf25c922a152ab8280c71ae58dc0ff46a33f60004",
+      "linux/amd64": "ebc3194ad1d1b1787614405285a0039665cd4c5bd3305215a1b201600f90630b",
+      "linux/arm64": "ef33741b684c9f62d6a21e7a3c8b051f139ea7b1d301693b67cc819c46226d53",
+      "windows/amd64": "67807490e909a37f58ef40b67601896d8d4da2411c9839221dae55732c243fe9",
+      "windows/arm64": "ff7a728ebdf86770d45c522f88b901e7fb3c06692b0d0c6a8a3a2c9bcf01b682"
+    },
+    "go.tools.goreleaser.version": "2.19.0",
+    "go.tools.govulncheck": "golang.org/x/vuln/cmd/govulncheck@v1.9.0",
+    "go.tools.syft.sha256": {
+      "darwin/amd64": "e2e5831cbabaec9a36fe65c34755c1113982c842a685edce3ce0b54a0ded8003",
+      "darwin/arm64": "1217c258bd5eb91ef3189cf22a82e02f9cac07e4ce934350f428e93aff674625",
+      "linux/amd64": "bb65249542db5fedeeb4d3f9b018b75e7264dbfbbb10486f044581a92f90490d",
+      "linux/arm64": "929bd163db2d7cd2255d3bcb8967208079813d7b46b0c952f7b794d8e2c7d304",
+      "windows/amd64": "ada4c9b93af575f479ce80fce6629897272a2d41f300a14bc49bace020767ca2",
+      "windows/arm64": "f52f7796e41e4d1ae511c228c99239fd09887077336dcb7a8c2aa7046ed7c816"
+    },
+    "go.tools.syft.version": "1.55.0",
+    "go.tools.upx.sha256": {
+      "linux/amd64": "402162aad30af47e60dbd767fb2e64ca394ace9727ba1f40283641f1d1b91657",
+      "linux/arm64": "a72d112c5970a904a31da0b9c84f919bc16b9a311787c12245508544a78c7d36",
+      "windows/amd64": "eabc6792a347d45e945be7748423e7868fd01b0d2bcaa2f4b1031fd71ff69bda"
+    },
+    "go.tools.upx.version": "5.2.1",
+    "go.tools.zig.sha256": {
+      "darwin/amd64": "4f9a1c5269aa17ebda5e6d3c2b89d6cbf36f7d2b22a0306e9ab98f25f95529c6",
+      "darwin/arm64": "b607e9b9234790a008116ae5bdb71c6243b84b9fb42a53a9e70fde41c06c536a",
+      "linux/amd64": "1cbe9df9f27e6b78d14ccbca43b6703a404ef79ef1c463de901d7f088d4e2026",
+      "linux/arm64": "9e8d11661d4ae3bd57702a3832781e23ad151dde5798e16a5ccd503f65234ff8",
+      "windows/amd64": "b5663f69581dcf391293fbf16c06cb80d81d806545ce618b4d0bab7f0eb8c428",
+      "windows/arm64": "0a59d91fa1cb40cf068e9b0954434ce973500c7a2ea749f1e01af62cdab52d26"
+    },
+    "go.tools.zig.version": "0.17.0",
+    "license.ci.timeout": 10,
+    "license.directories": [],
+    "license.exclude": [],
+    "license.parameters.additional-use-grant": "",
+    "license.parameters.change-date": "",
+    "license.parameters.change-license": "",
+    "license.parameters.licensed-work": "",
+    "license.styles": {},
+    "spec.ci.timeout": 10,
+    "spec.roles": [],
+    "spec.tools.spec.sha256": {
+      "darwin/amd64": "af667806ff4d1b98975dbf25d9994748edc9abc0c8b170ea478365fe86d7ace3",
+      "darwin/arm64": "ab07badc7456450212860080aa8b4c17b490b7bf94578c1f552307b6cfeb287b",
+      "linux/amd64": "52c6e38ae99491e5cbeaf5e48ffb7aeec7a4ab432a9f925d5f63788cdafdfba6",
+      "linux/arm64": "533883b706ebb63501d3791f37e74d6b50dfa5707b59e641ce6415dea5af6443",
+      "windows/amd64": "d3ca18f4ec1991867e6bf3ecad3ad963754f1c8deae0cfb42fd46d42552a39f2",
+      "windows/arm64": "fcbeb31e10146308d86f2682016f70fd7eb2a4b76ba2f72a4ced9118e9976c88"
+    },
+    "spec.tools.spec.version": "0.4.0"
+  },
+  "answers": {
+    "name": "dokimi-spec",
+    "owner": "Dokimasia B.V.",
+    "license": "Apache-2.0",
+    "repository": "dokimasia/dokimi-spec",
+    "security-contact": "security@dokimi.dev",
+    "languages": [
+      "go"
+    ],
+    "year": 2026
+  }
+}
