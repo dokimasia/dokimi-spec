@@ -12,20 +12,10 @@ type DefectFormID string
 type DefectForm struct {
 	ID DefectFormID `json:"id"`
 
-	// Changes is the callable that the form overrides: callable for the
-	// callable of the check, partner:<name> for a partner of its claim,
-	// declaration for the first callable of the declaration with a value
-	// result, or medium for the medium that the form opens the subject over.
-	Changes string `json:"changes"`
-
 	// Does is what the override does, as one sentence.
 	Does string `json:"does"`
 
 	Since string `json:"since"`
-
-	// MinSteps is the length of the shortest sequence of calls that shows
-	// the defect.
-	MinSteps int `json:"min-steps"`
 }
 
 func (f *DefectForm) key() DefectFormID { return f.ID }

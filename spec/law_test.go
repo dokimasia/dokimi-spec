@@ -4,12 +4,13 @@
 package spec_test
 
 import (
+	"slices"
 	"testing"
 
 	"go.dokimi.dev/assert"
 	"go.dokimi.dev/assert/expect"
 
-	"go.dokimi.dev/spec"
+	"github.com/dokimasia/dokimi-spec/spec"
 )
 
 func TestLaw(t *testing.T) {
@@ -31,28 +32,15 @@ func TestLaw(t *testing.T) {
 			validates(t, "laws")
 		})
 
-		t.Run("returns laws whose depth is a machinery of the spec", func(t *testing.T) {
+		t.Run("returns laws that a claim witnesses", func(t *testing.T) {
 			t.Parallel()
-
-			for _, l := range spec.Laws() {
-				_, ok := spec.MachineryOf(l.Depth)
-				expect.True(t, ok, "the depth of law "+string(l.ID)+" is a machinery of the spec")
+			witnessed := make([]spec.LawID, 0, len(spec.Claims()))
+			for _, c := range spec.Claims() {
+				witnessed = append(witnessed, c.Law)
 			}
-		})
-
-		t.Run("returns laws that are distinct from other laws of the spec", func(t *testing.T) {
-			t.Parallel()
 
 			for _, l := range spec.Laws() {
-				for _, d := range l.DistinctFrom {
-					_, ok := spec.LawOf(d.Law)
-					expect.True(t, ok && d.Law != l.ID, "law "+string(l.ID)+" is distinct from another law of the spec")
-					expect.True(
-						t,
-						d.Case != "",
-						"law "+string(l.ID)+" states the case that separates it from "+string(d.Law),
-					)
-				}
+				expect.True(t, slices.Contains(witnessed, l.ID), "a claim witnesses the law "+string(l.ID))
 			}
 		})
 	})

@@ -10,7 +10,7 @@ import (
 	"go.dokimi.dev/assert"
 	"go.dokimi.dev/assert/expect"
 
-	"go.dokimi.dev/spec"
+	"github.com/dokimasia/dokimi-spec/spec"
 )
 
 func TestMachinery(t *testing.T) {

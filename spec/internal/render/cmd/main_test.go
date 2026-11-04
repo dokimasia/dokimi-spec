@@ -14,7 +14,7 @@ import (
 	"go.dokimi.dev/assert/expect"
 	"go.dokimi.dev/assert/files"
 
-	"go.dokimi.dev/spec/internal/render"
+	"github.com/dokimasia/dokimi-spec/spec/internal/render"
 )
 
 // childVar is the variable of the environment that makes the test binary run

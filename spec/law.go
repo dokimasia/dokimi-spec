@@ -14,25 +14,8 @@ type Law struct {
 	// Statement is the law as one sentence.
 	Statement string `json:"statement"`
 
-	// Depth is the machinery at which a check witnesses the law in full. A
-	// check whose claim does not list it witnesses the law at its shallow
-	// end.
-	Depth MachineryID `json:"depth"`
-
 	// Since is the version of the spec that added the law.
 	Since string `json:"since"`
-
-	// DistinctFrom contains each law that can be false while this one is
-	// true, with the case that separates them.
-	DistinctFrom []Distinction `json:"distinct-from"`
-}
-
-// Distinction is a law that can be false while another law is true.
-type Distinction struct {
-	Law LawID `json:"law"`
-
-	// Case is the situation in which the two laws disagree.
-	Case string `json:"case"`
 }
 
 func (l *Law) key() LawID { return l.ID }

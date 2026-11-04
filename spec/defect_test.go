@@ -10,7 +10,7 @@ import (
 	"go.dokimi.dev/assert"
 	"go.dokimi.dev/assert/expect"
 
-	"go.dokimi.dev/spec"
+	"github.com/dokimasia/dokimi-spec/spec"
 )
 
 func TestDefect(t *testing.T) {
@@ -32,7 +32,7 @@ func TestDefect(t *testing.T) {
 			validates(t, "defects")
 		})
 
-		t.Run("returns forms that a claim plants with a sequence of at least one call", func(t *testing.T) {
+		t.Run("returns forms that a claim plants", func(t *testing.T) {
 			t.Parallel()
 			planted := make([]spec.DefectFormID, 0, len(spec.Claims()))
 			for _, c := range spec.Claims() {
@@ -41,7 +41,6 @@ func TestDefect(t *testing.T) {
 
 			for _, f := range spec.DefectForms() {
 				expect.True(t, slices.Contains(planted, f.ID), "a claim plants the form "+string(f.ID))
-				expect.True(t, f.MinSteps >= 1, "the form "+string(f.ID)+" needs at least one call")
 			}
 		})
 	})
@@ -55,7 +54,7 @@ func TestDefect(t *testing.T) {
 			got, ok := spec.DefectFormOf(spec.PutRefuses)
 
 			assert.True(t, ok, "the spec has the form")
-			assert.Equal(t, got.Changes, "partner:put", "the form changes the partner put")
+			assert.Equal(t, got.Does, "The put fails on every call.", "the form has what it does")
 		})
 
 		t.Run("returns false for an identifier without a form", func(t *testing.T) {

@@ -7,9 +7,8 @@ import (
 	"testing"
 
 	"go.dokimi.dev/assert"
-	"go.dokimi.dev/assert/expect"
 
-	"go.dokimi.dev/spec"
+	"github.com/dokimasia/dokimi-spec/spec"
 )
 
 func TestGate(t *testing.T) {
@@ -34,14 +33,6 @@ func TestGate(t *testing.T) {
 
 			validates(t, "gates")
 		})
-
-		t.Run("returns gates with a reason and a remedy", func(t *testing.T) {
-			t.Parallel()
-
-			for _, g := range spec.Gates() {
-				expect.True(t, g.Why != "" && g.Remedy != "", "gate "+string(g.ID)+" has a reason and a remedy")
-			}
-		})
 	})
 
 	t.Run("GateOf", func(t *testing.T) {
@@ -53,7 +44,8 @@ func TestGate(t *testing.T) {
 			got, ok := spec.GateOf(spec.ReturnsBesideError)
 
 			assert.True(t, ok, "the spec has the gate")
-			assert.Equal(t, got.Why, "{callable} returns no value when it fails", "the gate has its reason")
+			assert.Equal(t, got, spec.Gate{ID: spec.ReturnsBesideError, Since: "1.0.0"},
+				"the gate has the version that added it")
 		})
 
 		t.Run("returns false for an identifier without a gate", func(t *testing.T) {

@@ -272,9 +272,9 @@ formatters:
     golines:
       max-len: 120
       reformat-tags: false
-    # The module go.dokimi.dev/spec forms an import group of its own.
+    # The tooling module of the definition forms an import group of its own.
     gci:
-      sections: [standard, default, "prefix(go.dokimi.dev/spec)"]
+      sections: [standard, default, "prefix(github.com/dokimasia/dokimi-spec)"]
 issues:
   max-issues-per-linter: 0
   max-same-issues: 0

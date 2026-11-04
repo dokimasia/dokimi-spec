@@ -1,14 +1,17 @@
 // Copyright Dokimasia B.V. 2026
 // SPDX-License-Identifier: Apache-2.0
 
-// Package spec contains the conformance spec of dokimi: the laws, claims,
-// gates, probes, reason codes, defect forms, machineries and stances that
-// the binary shares with the runtimes.
+// Package spec is the model of the runtime contract of the conformance spec
+// of dokimi: the laws, claims, gates, probes, reason codes, defect forms,
+// machineries and stances, the key form of a check identity and the suite
+// record.
 //
 // People edit the YAML files of the directory, and go generate renders each
 // of them into the JSON file of the same name, its JSON Schema under
-// schemas, and the constants of names.gen.go. The package embeds the JSON
-// files and decodes them on the first call of a function that reads them.
+// schemas, and the constants of names.gen.go. The tests of the package check
+// that the rendered files agree with each other. Each language repository
+// vendors the rendered files with spec, and no repository imports the
+// package.
 //
 // Each kind of entry has a function that returns every entry in the order
 // of its file, such as [Probes], and a function that returns one entry by

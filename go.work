@@ -4,6 +4,6 @@
 go 1.27.3
 
 // The repository has no module at its root. The directory spec contains the
-// definition and the module go.dokimi.dev/spec, and every ergon per-module
-// command runs in it.
+// definition and the module that renders and checks it, and every ergon
+// per-module command runs in it.
 use ./spec

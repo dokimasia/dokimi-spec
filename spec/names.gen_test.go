@@ -8,7 +8,7 @@ import (
 
 	"go.dokimi.dev/assert"
 
-	"go.dokimi.dev/spec"
+	"github.com/dokimasia/dokimi-spec/spec"
 )
 
 func TestNames(t *testing.T) {

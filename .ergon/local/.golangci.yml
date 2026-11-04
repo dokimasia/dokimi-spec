@@ -5,6 +5,6 @@
 
 formatters:
   settings:
-    # The module go.dokimi.dev/spec forms an import group of its own.
+    # The tooling module of the definition forms an import group of its own.
     gci:
-      sections: [standard, default, "prefix(go.dokimi.dev/spec)"]
+      sections: [standard, default, "prefix(github.com/dokimasia/dokimi-spec)"]

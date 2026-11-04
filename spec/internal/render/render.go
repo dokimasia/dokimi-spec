@@ -18,7 +18,7 @@ import (
 	"go.dokimi.dev/eidos/lang/naming"
 	"go.yaml.in/yaml/v3"
 
-	"go.dokimi.dev/spec"
+	"github.com/dokimasia/dokimi-spec/spec"
 )
 
 // The documents of the rendered files. The field of each section has the
@@ -42,15 +42,11 @@ type (
 	defectsDoc struct {
 		Forms []spec.DefectForm `json:"forms"`
 	}
-	referencesDoc struct {
-		References []spec.ReferenceForm `json:"references"`
-	}
 	machineriesDoc struct {
 		Machineries []spec.Machinery `json:"machineries"`
 	}
 	stancesDoc struct {
-		Stances   []spec.Stance    `json:"stances"`
-		Unclaimed []spec.Unclaimed `json:"unclaimed"`
+		Stances []spec.Stance `json:"stances"`
 	}
 )
 
@@ -70,7 +66,6 @@ var documents = []document{
 	{name: "probes", typ: reflect.TypeFor[probesDoc]()},
 	{name: "reasons", typ: reflect.TypeFor[reasonsDoc]()},
 	{name: "defects", typ: reflect.TypeFor[defectsDoc]()},
-	{name: "references", typ: reflect.TypeFor[referencesDoc]()},
 	{name: "machineries", typ: reflect.TypeFor[machineriesDoc]()},
 	{name: "stances", typ: reflect.TypeFor[stancesDoc]()},
 }
@@ -105,15 +100,12 @@ func Files() []string {
 
 // kind is the Go type of the identifiers of one section, which names.gen.go
 // declares its constants with, and the word that an error uses for an entry
-// of the section. A section without a kind, such as unclaimed, declares no
-// constants. The reference forms declare none, because only the generator fake
-// reads them, so a form has the identifier of its contract beside the claim of
-// that contract.
+// of the section.
 type kind struct {
 	goType, word string
 }
 
-// kinds contains the kind of each section that declares constants.
+// kinds contains the kind of each section of the files.
 var kinds = map[string]kind{
 	"laws":        {"LawID", "law"},
 	"claims":      {"ClaimID", "claim"},
@@ -157,8 +149,7 @@ const text = "string"
 
 // schemaOptions are the options of the inference of each schema. Each
 // identifier type has the pattern of an identifier, and a seed has the pattern
-// of a seed. An application, a result, a state and an effect have the values
-// of the spec.
+// of a seed. An application and a result have the values of the spec.
 func schemaOptions() *jsonschema.ForOptions {
 	id := &jsonschema.Schema{Type: text, Pattern: identifier}
 	types := map[reflect.Type]*jsonschema.Schema{
@@ -167,13 +158,11 @@ func schemaOptions() *jsonschema.ForOptions {
 			Type: text, Enum: []any{string(spec.Falsification), string(spec.OnSubject)},
 		},
 		reflect.TypeFor[spec.Result](): {Type: text, Enum: values(spec.Results)},
-		reflect.TypeFor[spec.State]():  {Type: text, Enum: values(spec.States)},
-		reflect.TypeFor[spec.Effect](): {Type: text, Enum: values(spec.Effects)},
 	}
 	for _, t := range []reflect.Type{
 		reflect.TypeFor[spec.LawID](), reflect.TypeFor[spec.ClaimID](), reflect.TypeFor[spec.GateID](),
 		reflect.TypeFor[spec.ProbeID](), reflect.TypeFor[spec.ReasonID](), reflect.TypeFor[spec.DefectFormID](),
-		reflect.TypeFor[spec.ReferenceFormID](), reflect.TypeFor[spec.MachineryID](), reflect.TypeFor[spec.StanceID](),
+		reflect.TypeFor[spec.MachineryID](), reflect.TypeFor[spec.StanceID](),
 	} {
 		types[t] = id
 	}
@@ -209,6 +198,7 @@ func Render(dir string) (err error) {
 	if err != nil {
 		return fmt.Errorf("open the directory of the spec: %w", err)
 	}
+	//dokimi:mutate-skip sbr-delete: no spec makes the close of a root fail, and the close of a directory has no effect that a caller observes
 	defer func() { err = errors.Join(err, root.Close()) }()
 	return render(root)
 }
@@ -228,6 +218,7 @@ func render(root *os.Root) error {
 			return err
 		}
 		schema, err := jsonschema.ForType(d.typ, opts)
+		//dokimi:mutate-skip ror-true: ForType returns an error only for a type without a JSON Schema, and each document has one
 		if err == nil {
 			schema.Schema = draft
 			err = writeJSON(root, "schemas/"+d.name+".schema.json", schema)
@@ -327,7 +318,7 @@ type sectionIDs struct {
 }
 
 // renderFile renders the YAML file of d in root into its JSON file, and
-// returns the identifiers of each section that declares constants.
+// returns the identifiers of each section.
 func renderFile(root *os.Root, d document) ([]sectionIDs, error) {
 	source := d.name + ".yaml"
 	data, err := root.ReadFile(source)
@@ -354,9 +345,7 @@ func renderFile(root *os.Root, d document) ([]sectionIDs, error) {
 		if err != nil {
 			return nil, fmt.Errorf("%s: section %s: %w", source, key, err)
 		}
-		if _, ok := kinds[key]; ok {
-			ids = append(ids, sectionIDs{section: key, ids: keys})
-		}
+		ids = append(ids, sectionIDs{section: key, ids: keys})
 		k, _ := json.Marshal(key)
 		raw.Write(k)
 		raw.WriteByte(':')
@@ -377,10 +366,7 @@ func renderFile(root *os.Root, d document) ([]sectionIDs, error) {
 
 // entries returns the section key, a mapping from the identifier of each
 // entry to the entry, as a JSON array of the entries with the identifier
-// under the key id, and the identifiers in the order of the section. The
-// inputs and the partners of an entry become arrays with the name of each
-// under the key name, and a mixin under the key unless becomes an object
-// with the mixin under the key mixin.
+// under the key id, and the identifiers in the order of the section.
 func entries(key string, section *yaml.Node) ([]byte, []string, error) {
 	if section.Kind != yaml.MappingNode {
 		return nil, nil, fmt.Errorf("the section %s is no mapping of identifiers to entries", key)
@@ -408,9 +394,7 @@ func entries(key string, section *yaml.Node) ([]byte, []string, error) {
 }
 
 // named returns a mapping as a JSON object that starts with the key field
-// and the value name. Each mapping under the key inputs or partners becomes
-// an array of objects with the name of each under the key name, and a scalar
-// under the key unless becomes an object with the scalar under the key mixin.
+// and the value name.
 func named(n *yaml.Node, field, name string) ([]byte, error) {
 	if n.Kind != yaml.MappingNode {
 		return nil, fmt.Errorf("the entry %s is no mapping", name)
@@ -424,17 +408,7 @@ func named(n *yaml.Node, field, name string) ([]byte, error) {
 	out.Write(v)
 	for i := 0; i < len(n.Content); i += 2 {
 		key, value := n.Content[i].Value, n.Content[i+1]
-		var data []byte
-		var err error
-		switch {
-		case (key == "inputs" || key == "partners") && value.Kind == yaml.MappingNode:
-			data, err = namedList(value)
-		case key == "unless" && value.Kind == yaml.ScalarNode:
-			mixin, _ := json.Marshal(value.Value)
-			data = append(append([]byte(`{"mixin":`), mixin...), '}')
-		default:
-			data, err = plain(value)
-		}
+		data, err := plain(value)
 		if err != nil {
 			return nil, fmt.Errorf("%s: %w", key, err)
 		}
@@ -445,25 +419,6 @@ func named(n *yaml.Node, field, name string) ([]byte, error) {
 		out.Write(data)
 	}
 	out.WriteByte('}')
-	return out.Bytes(), nil
-}
-
-// namedList returns a mapping from names to objects as a JSON array of the
-// objects, with the name of each under the key name.
-func namedList(n *yaml.Node) ([]byte, error) {
-	var out bytes.Buffer
-	out.WriteByte('[')
-	for i := 0; i < len(n.Content); i += 2 {
-		if i > 0 {
-			out.WriteByte(',')
-		}
-		data, err := named(n.Content[i+1], "name", n.Content[i].Value)
-		if err != nil {
-			return nil, err
-		}
-		out.Write(data)
-	}
-	out.WriteByte(']')
 	return out.Bytes(), nil
 }
 

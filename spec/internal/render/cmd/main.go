@@ -9,7 +9,7 @@ import (
 	"fmt"
 	"os"
 
-	"go.dokimi.dev/spec/internal/render"
+	"github.com/dokimasia/dokimi-spec/spec/internal/render"
 )
 
 func main() {

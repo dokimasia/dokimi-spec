@@ -7,15 +7,14 @@ import (
 	"encoding/json"
 	"io/fs"
 	"path/filepath"
-	"strings"
 	"testing"
 
 	"github.com/google/jsonschema-go/jsonschema"
 	"go.dokimi.dev/assert"
 	"go.dokimi.dev/assert/files"
 
-	"go.dokimi.dev/spec"
-	"go.dokimi.dev/spec/internal/render"
+	"github.com/dokimasia/dokimi-spec/spec"
+	"github.com/dokimasia/dokimi-spec/spec/internal/render"
 )
 
 // minimal is a spec with one entry of each kind, in the form that people
@@ -26,42 +25,23 @@ func minimal() files.Tree {
 		"laws.yaml": files.Text(`laws:
   no-value-beside-an-error:
     statement: A call that fails returns no value.
-    depth: nothing-beyond-a-caller
-    distinct-from: []
     since: 1.0.0
 `),
 		"claims.yaml": files.Text(`claims:
   zero-on-error:
-    generator: suite
-    licences:
-      - shape: reader
-    unless: default-on-error
-    gates: [failure, returns-beside-error]
     law: no-value-beside-an-error
     machineries: [nothing-beyond-a-caller]
     statement: "{callable} returns the zero value beside an error"
     probe: zero-beside-error
-    partners:
-      write: {mode: named, param: write}
-    inputs:
-      call: {from: callable}
-      zero: {from: zero}
     defect:
       form: value-beside
-      clause: "a {declaration} whose {callable} returns a value beside an error"
       reason: value-beside-error
     since: 1.0.0
 `),
 		"gates.yaml": files.Text(`gates:
   failure:
-    passes: The error model of the callable is not none.
-    why: "{callable} cannot fail"
-    remedy: "declare an error result"
     since: 1.0.0
   returns-beside-error:
-    passes: The error model of the callable is last-return.
-    why: "{callable} returns no value when it fails"
-    remedy: "none, because the language returns no value beside an error"
     since: 1.0.0
 `),
 		"probes.yaml": files.Text(`probes:
@@ -81,18 +61,7 @@ func minimal() files.Tree {
 `),
 		"defects.yaml": files.Text(`forms:
   value-beside:
-    changes: callable
     does: A failed call returns the second sample of the value instead of the zero value.
-    min-steps: 1
-    since: 1.0.0
-`),
-		"references.yaml": files.Text(`references:
-  persister:
-    contract: persister
-    state: map
-    roles:
-      writer: store
-      reader: load
     since: 1.0.0
 `),
 		"machineries.yaml": files.Text(`machineries:
@@ -106,10 +75,6 @@ func minimal() files.Tree {
     meaning: The classification implies nothing that a check could falsify.
     closes: Nothing.
     since: 1.0.0
-unclaimed:
-  mixin:deprecated:
-    stance: silent
-    note: The mixin documents the callable.
 `),
 		"keys.yaml": files.Text(
 			"identities:\n  - Store.ReadAll/zero-on-error\n  - HTTPServer.Serve/cancel#0-generated\n",
@@ -127,8 +92,8 @@ func TestRender(t *testing.T) {
 			t.Parallel()
 
 			assert.Equal(t, render.Files(), []string{
-				"laws", "claims", "gates", "probes", "reasons", "defects", "references", "machineries", "stances",
-			}, "the spec has nine files")
+				"laws", "claims", "gates", "probes", "reasons", "defects", "machineries", "stances",
+			}, "the spec has eight files")
 		})
 	})
 
@@ -157,59 +122,6 @@ func TestRender(t *testing.T) {
 				[]string{got.Gates[0].ID, got.Gates[1].ID},
 				[]string{"failure", "returns-beside-error"},
 				"the gates keep the order of gates.yaml",
-			)
-		})
-
-		t.Run("writes the inputs of a claim as a list with the name of each input", func(t *testing.T) {
-			t.Parallel()
-			dir := files.Workspace(t, minimal())
-
-			assert.NoError(t, render.Render(dir), "the spec renders")
-
-			var got struct {
-				Claims []struct {
-					Partners []map[string]string `json:"partners"`
-					Inputs   []map[string]string `json:"inputs"`
-				} `json:"claims"`
-			}
-			assert.NoError(
-				t,
-				json.Unmarshal([]byte(files.Read(t, filepath.Join(dir, "claims.json"))), &got),
-				"claims.json decodes",
-			)
-			assert.Equal(t, got.Claims[0].Inputs, []map[string]string{
-				{"name": "call", "from": "callable"},
-				{"name": "zero", "from": "zero"},
-			}, "the inputs keep the order of claims.yaml")
-			assert.Equal(
-				t,
-				got.Claims[0].Partners,
-				[]map[string]string{{"name": "write", "mode": "named", "param": "write"}},
-				"the partners are a list with the name of each",
-			)
-		})
-
-		t.Run("writes a mixin under unless as an object with the mixin", func(t *testing.T) {
-			t.Parallel()
-			dir := files.Workspace(t, minimal())
-
-			assert.NoError(t, render.Render(dir), "the spec renders")
-
-			var got struct {
-				Claims []struct {
-					Unless map[string]string `json:"unless"`
-				} `json:"claims"`
-			}
-			assert.NoError(
-				t,
-				json.Unmarshal([]byte(files.Read(t, filepath.Join(dir, "claims.json"))), &got),
-				"claims.json decodes",
-			)
-			assert.Equal(
-				t,
-				got.Claims[0].Unless,
-				map[string]string{"mixin": "default-on-error"},
-				"the mixin is under the key mixin",
 			)
 		})
 
@@ -410,50 +322,6 @@ func TestRender(t *testing.T) {
 			}, "names.gen.go declares the entries in the order of the files")
 		})
 
-		t.Run("writes no constant of a reference form, which can have the identifier of a claim", func(t *testing.T) {
-			t.Parallel()
-			tree := minimal()
-			tree["references.yaml"] = files.Text(`references:
-  zero-on-error:
-    contract: persister
-    state: map
-    roles:
-      writer: store
-      reader: load
-    since: 1.0.0
-`)
-			dir := files.Workspace(t, tree)
-
-			assert.NoError(t, render.Render(dir), "the spec renders a form with the identifier of a claim")
-
-			assert.Equal(t, strings.Count(files.Read(t, filepath.Join(dir, "names.gen.go")), `"zero-on-error"`), 1,
-				"names.gen.go declares the identifier once, as the constant of the claim")
-		})
-
-		t.Run("writes a schema of the reference forms with the states and the effects of the spec", func(t *testing.T) {
-			t.Parallel()
-			dir := files.Workspace(t, minimal())
-
-			assert.NoError(t, render.Render(dir), "the spec renders")
-
-			var schema jsonschema.Schema
-			text := files.Read(t, filepath.Join(dir, "schemas", "references.schema.json"))
-			assert.NoError(t, json.Unmarshal([]byte(text), &schema), "the schema decodes")
-			resolved, err := schema.Resolve(nil)
-			assert.NoError(t, err, "the schema resolves")
-			form := func(state, effect string) map[string]any {
-				return map[string]any{"references": []any{map[string]any{
-					"id": "persister", "contract": "persister", "state": state,
-					"roles": map[string]any{"writer": effect}, "since": "1.0.0",
-				}}}
-			}
-			assert.NoError(t, resolved.Validate(form("list", "append")),
-				"the schema accepts a state and an effect of the spec")
-			assert.HasError(t, resolved.Validate(form("tree", "store")), "the schema refuses a state outside the spec")
-			assert.HasError(t, resolved.Validate(form("map", "delete")),
-				"the schema refuses an effect outside the spec")
-		})
-
 		t.Run("writes the spelling of each identifier in each language by its section", func(t *testing.T) {
 			t.Parallel()
 			tree := minimal()
@@ -462,7 +330,6 @@ func TestRender(t *testing.T) {
     meaning: The classification has a law and no claim.
     closes: A claim.
     since: 1.0.0
-unclaimed: {}
 `)
 			dir := files.Workspace(t, tree)
 
@@ -484,7 +351,7 @@ unclaimed: {}
 			assert.Equal(t, got.Names["stances"]["ttl-gap"], map[string]string{
 				"go": "TTLGap", "typescript": "ttlGap",
 			}, "Go spells the initialism in capitals and TypeScript does not")
-			assert.Length(t, got.Names, 8, "each section with constants has its names")
+			assert.Length(t, got.Names, 8, "each section has its names")
 		})
 
 		t.Run("returns an error for naming.json that it cannot write", func(t *testing.T) {
@@ -516,6 +383,34 @@ unclaimed: {}
 			)
 		})
 
+		t.Run("returns an error for a field of the rules of the generator", func(t *testing.T) {
+			t.Parallel()
+			tree := minimal()
+			tree["gates.yaml"] = files.Text(
+				"gates:\n  failure:\n    why: \"{callable} cannot fail\"\n    since: 1.0.0\n",
+			)
+			dir := files.Workspace(t, tree)
+
+			err := render.Render(dir)
+
+			assert.HasError(t, err, "the field of a rule fails the render")
+			assert.Contains(t, err.Error(), `gates.yaml: json: unknown field "why"`,
+				"the error names the file and the field")
+		})
+
+		t.Run("returns an error for a section that the file does not have", func(t *testing.T) {
+			t.Parallel()
+			tree := minimal()
+			tree["stances.yaml"] = files.Text("stances: {}\nunclaimed:\n  mixin:deprecated:\n    stance: silent\n")
+			dir := files.Workspace(t, tree)
+
+			err := render.Render(dir)
+
+			assert.HasError(t, err, "the section of the rules fails the render")
+			assert.Contains(t, err.Error(), `stances.yaml: json: unknown field "unclaimed"`,
+				"the error names the file and the section")
+		})
+
 		tests := []struct {
 			name     string
 			giveFile string
@@ -545,26 +440,22 @@ unclaimed: {}
 				giveText: "laws:\n  a: b\n", wantErr: "laws.yaml: section laws: a: the entry a is no mapping",
 			},
 			{
-				name:     "returns an error for an input that is no mapping",
+				name:     "returns an error for an element of a list that does not decode",
 				giveFile: "claims.yaml",
-				giveText: "claims:\n  a:\n    inputs:\n      call: callable\n",
-				wantErr:  "claims.yaml: section claims: a: inputs: the entry call is no mapping",
+				giveText: "claims:\n  a:\n    machineries: [!!int x]\n",
+				wantErr:  "claims.yaml: section claims: a: machineries: line 3:",
 			},
 			{
-				name:     "returns an error for a nested value that does not decode",
-				giveFile: "laws.yaml",
-				giveText: "laws:\n  a:\n    distinct-from: [{law: !!int x}]\n",
-				wantErr:  "laws.yaml: section laws: a: distinct-from: line 3:",
+				name:     "returns an error for a value of a mapping that does not decode",
+				giveFile: "claims.yaml",
+				giveText: "claims:\n  a:\n    defect: {form: !!int x}\n",
+				wantErr:  "claims.yaml: section claims: a: defect: line 3:",
 			},
 			{
 				name:     "returns an error for a number that JSON cannot state",
 				giveFile: "laws.yaml",
-				giveText: "laws:\n  a:\n    depth: .nan\n",
-				wantErr:  "laws.yaml: section laws: a: depth: line 3: json: unsupported value: NaN",
-			},
-			{
-				name: "returns an error for an unless that is neither a mixin nor a param", giveFile: "claims.yaml",
-				giveText: "claims:\n  a:\n    unless: [x]\n", wantErr: "claims.yaml: json: cannot unmarshal array",
+				giveText: "laws:\n  a:\n    statement: .nan\n",
+				wantErr:  "laws.yaml: section laws: a: statement: line 3: json: unsupported value: NaN",
 			},
 			{
 				name:     "returns an error for an identifier that starts with an article",
