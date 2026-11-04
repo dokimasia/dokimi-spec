@@ -12,7 +12,7 @@ import (
 	"go.dokimi.dev/assert/expect"
 	"go.dokimi.dev/eidos/plugin/shape"
 
-	"go.dokimi.dev/dokimi/spec"
+	"go.dokimi.dev/spec"
 )
 
 // classified returns the spec of the shape catalog for a classification,

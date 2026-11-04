@@ -10,7 +10,7 @@ import (
 
 	"go.dokimi.dev/assert"
 
-	"go.dokimi.dev/dokimi/spec"
+	"go.dokimi.dev/spec"
 )
 
 // example is the suite record of the example of the spec.

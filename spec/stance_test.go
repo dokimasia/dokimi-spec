@@ -11,7 +11,7 @@ import (
 	"go.dokimi.dev/assert/expect"
 	"go.dokimi.dev/eidos/plugin/shape"
 
-	"go.dokimi.dev/dokimi/spec"
+	"go.dokimi.dev/spec"
 )
 
 // covered returns each classification that a claim covers, in the form of

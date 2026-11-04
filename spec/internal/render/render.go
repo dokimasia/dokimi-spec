@@ -18,7 +18,7 @@ import (
 	"go.dokimi.dev/eidos/lang/naming"
 	"go.yaml.in/yaml/v3"
 
-	"go.dokimi.dev/dokimi/spec"
+	"go.dokimi.dev/spec"
 )
 
 // The documents of the rendered files. The field of each section has the

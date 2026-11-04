@@ -64,7 +64,7 @@
     {
       "path": ".github/workflows/ci.yml",
       "producer": "github",
-      "sha256": "f3c6dc611200c39dead228510d2b5c3d975cdc6dd1582e5eda24dc12d0e2c9dc"
+      "sha256": "22d9b7bc2ad6102625ddd91352f46f41f9dd9dd74730ff3e47fd22c7809cdaa7"
     },
     {
       "path": ".github/workflows/codeql.yml",
@@ -99,7 +99,8 @@
     {
       "path": ".golangci.yml",
       "producer": "go",
-      "sha256": "b2d824915cacbed6fa4e4eb7f8a06a9d5b81f6951d95fc565beafd8021127bb7"
+      "local": "fbf96a8d97c5f60ba002b6438d09dcbfa443ebb29100d653e4ad6fa3e9b7c9fc",
+      "sha256": "4d0f6fd037db15299d78a712cf6a6de0f2399be7f28f65d782932da4e38228eb"
     },
     {
       "path": ".markdownlint.yml",
@@ -129,7 +130,7 @@
     {
       "path": "Makefile",
       "producer": "common",
-      "sha256": "386add020a8a96dc6cb892a3a47d2ac9d3475f3dc3d4f515309fb4578ba0c3df"
+      "sha256": "705855ea7748b4ab4d79ed5399b9807556a93064776081679131f0553c7eb85e"
     },
     {
       "path": "NOTICE",

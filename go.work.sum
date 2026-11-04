@@ -1,0 +1,9 @@
+github.com/dokimasia/tree-sitter-python v0.0.0-20261020093147-bab31bd04b20/go.mod h1:iHCOyeR+7461i52Odey1nLJnBiY0bqXQKKv46ild+9s=
+github.com/dokimasia/tree-sitter-typescript v0.0.0-20261020225451-839d520b3f2a/go.mod h1:JSxh+6CN/ncWDvjQShtpELPRGTKqiOpJtpFIVlLNeeM=
+github.com/mattn/go-pointer v0.0.1/go.mod h1:2zXcozF6qYGgmsG+SeTZz3oAbFLdD3OWqnUbNvJZAlc=
+github.com/stretchr/testify v1.11.1/go.mod h1:wZwfW3scLgRK+23gO65QZefKpKQRnfz6sD981Nm4B6U=
+github.com/tree-sitter/go-tree-sitter v0.25.0/go.mod h1:r77ig7BikoZhHrrsjAnv8RqGti5rtSyvDHPzgTPsUuU=
+github.com/tree-sitter/tree-sitter-java v0.23.5/go.mod h1:NRKlI8+EznxA7t1Yt3xtraPk1Wzqh3GAIC46wxvc320=
+github.com/tree-sitter/tree-sitter-rust v0.24.2/go.mod h1:hfeGWic9BAfgTrc7Xf6FaOAguCFJRo3RBbs7QJ6D7MI=
+go.dokimi.dev/eidos/plugin/shape v0.3.1-0.20261102195551-8f3aeb587120 h1:I5Uc36YudP5tlaitGRpUQ93yoD9SiYd3z4mLwnsQW4o=
+go.dokimi.dev/eidos/plugin/shape v0.3.1-0.20261102195551-8f3aeb587120/go.mod h1:1FtrO1AXo72BxboZEMS48IfcyDPMBkDcBsMqv4PaIqo=

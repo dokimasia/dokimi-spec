@@ -14,8 +14,8 @@ import (
 	"go.dokimi.dev/assert"
 	"go.dokimi.dev/assert/files"
 
-	"go.dokimi.dev/dokimi/spec"
-	"go.dokimi.dev/dokimi/spec/internal/render"
+	"go.dokimi.dev/spec"
+	"go.dokimi.dev/spec/internal/render"
 )
 
 // minimal is a spec with one entry of each kind, in the form that people
