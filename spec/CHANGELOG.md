@@ -1,5 +1,14 @@
 # go.dokimi.dev/spec
 
+## 0.3.0
+
+### Minor Changes
+
+- 49aaf3c: Add the claim `returns-on-error` with its law, probe, reason and defect form.
+- 49aaf3c: Add the claims `serializable` and `snapshot-isolation` with their laws, probes, reasons and defect forms.
+- 49aaf3c: Add the gates `stable-subject`, `unrefused`, `returns-no-field` and `transactions`, and the machinery `inputs-built-from-the-subject`.
+- ab444f0: Move the module to dokimasia/dokimi-spec with the model of each entry of the spec, such as `Claims` and `GateOf`.
+
 ## 0.2.0
 
 ### Minor Changes
