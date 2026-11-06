@@ -57,3 +57,9 @@ machineries:
       the dependencies and the processes, and a trace of every step.
     by: sim
     since: 1.0.0
+  quiescence:
+    supplies: >-
+      A wait before each step of the run until no goroutine or task of the subject can run. Every
+      goroutine of the subject is durably blocked, or no task of the task scheduler is ready.
+    by: runtime
+    since: 2.1.0

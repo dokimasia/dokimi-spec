@@ -149,7 +149,7 @@ const text = "string"
 
 // schemaOptions are the options of the inference of each schema. Each
 // identifier type has the pattern of an identifier, and a seed has the pattern
-// of a seed. An application and a result have the values of the spec.
+// of a seed. An application, a result and a mode have the values of the spec.
 func schemaOptions() *jsonschema.ForOptions {
 	id := &jsonschema.Schema{Type: text, Pattern: identifier}
 	types := map[reflect.Type]*jsonschema.Schema{
@@ -158,6 +158,7 @@ func schemaOptions() *jsonschema.ForOptions {
 			Type: text, Enum: []any{string(spec.Falsification), string(spec.OnSubject)},
 		},
 		reflect.TypeFor[spec.Result](): {Type: text, Enum: values(spec.Results)},
+		reflect.TypeFor[spec.Mode]():   {Type: text, Enum: values(spec.Modes)},
 	}
 	for _, t := range []reflect.Type{
 		reflect.TypeFor[spec.LawID](), reflect.TypeFor[spec.ClaimID](), reflect.TypeFor[spec.GateID](),

@@ -1102,3 +1102,17 @@ probes:
     reasons: [not-snapshot-isolated]
     vacuous: No transaction of a run commits.
     since: 1.2.0
+  faulty-world-history:
+    summary: After each step of a world that crashes the subject and strikes faults of its medium, its dependencies and its clock, each partition of the history of the calls of its concurrent clients has an order in which the reference returns the same results.
+    inputs:
+      - {name: world, kind: world}
+    reasons: [not-linearizable-under-faults]
+    vacuous: The checker decides no partition with a call within its budget.
+    since: 2.1.0
+  world-recovery:
+    summary: After the steps of a world, each fault ends, a crashed subject opens again, and one call of each operation on each client completes within the bound of the world.
+    inputs:
+      - {name: world, kind: world}
+    reasons: [call-open-after-recovery]
+    vacuous: Never, because the probe makes the calls of the recovery itself.
+    since: 2.1.0

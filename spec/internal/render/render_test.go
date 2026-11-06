@@ -300,6 +300,11 @@ func TestRender(t *testing.T) {
 			assert.HasError(t, resolved.Validate(record("0x5f3a", "pass")), "the schema refuses a short seed")
 			assert.HasError(t, resolved.Validate(record("0x5f3a1c9e27d4b860", "green")),
 				"the schema refuses a result outside the spec")
+			simulated := record("0x5f3a1c9e27d4b860", "pass")
+			simulated["checks"].([]any)[0].(map[string]any)["world"] = map[string]any{
+				"mode": "simulated", "steps": 1, "faults": map[string]any{},
+			}
+			assert.HasError(t, resolved.Validate(simulated), "the schema refuses a mode outside the spec")
 		})
 
 		t.Run("writes a constant for each entry in the order of the files", func(t *testing.T) {
