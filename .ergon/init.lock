@@ -1,5 +1,5 @@
 {
-  "ergon": "0.17.1",
+  "ergon": "0.17.2",
   "files": [
     {
       "path": ".commitlint.yaml",
@@ -64,7 +64,7 @@
     {
       "path": ".github/workflows/ci.yml",
       "producer": "github",
-      "sha256": "22d9b7bc2ad6102625ddd91352f46f41f9dd9dd74730ff3e47fd22c7809cdaa7"
+      "sha256": "f0669845b12aba4abda30acacea5296ce42b16ce17796d6f04ce5c95d8304c33"
     },
     {
       "path": ".github/workflows/codeql.yml",
@@ -74,7 +74,7 @@
     {
       "path": ".github/workflows/nightly.yml",
       "producer": "github",
-      "sha256": "aa27282a8853966dc5393d2b46901bc2250129cf1a743f20324539bbaf027349"
+      "sha256": "e84e7f1d6f4f90dd7b8c77f85afa441efd5b768668484bc34a3ea850b716b2ce"
     },
     {
       "path": ".github/workflows/release.yml",
@@ -130,7 +130,7 @@
     {
       "path": "Makefile",
       "producer": "common",
-      "sha256": "705855ea7748b4ab4d79ed5399b9807556a93064776081679131f0553c7eb85e"
+      "sha256": "65ae1fac132fed3677fd0d726e2098f0b0d0513400d633aca67a80e4b45d89db"
     },
     {
       "path": "NOTICE",
@@ -242,7 +242,11 @@
     ],
     "go.homebrew.tap": "",
     "go.lint.analyzers": "go.dokimi.dev/lint/golangci@v0.2.0",
+    "go.lint.cache-invalidation-interval": 7,
     "go.lint.plugins": {},
+    "go.longtest.args": [
+      "-count=1"
+    ],
     "go.mutate.args": [],
     "go.mutate.skip": [],
     "go.mutate.timeout": "0s",
@@ -271,7 +275,7 @@
       "windows/amd64": "cbe953787074611f1334cbf37dc1cf953995bb8c45398eb4fc7bb781d29c1f2a"
     },
     "go.tools.cosign.version": "3.1.4",
-    "go.tools.dokimi-mutate-go": "go.dokimi.dev/mutate/cmd/dokimi-mutate-go@v0.1.0",
+    "go.tools.dokimi-mutate-go": "go.dokimi.dev/mutate/cmd/dokimi-mutate-go@v0.3.0",
     "go.tools.golangci-lint": "github.com/golangci/golangci-lint/v2/cmd/golangci-lint@v2.15.0",
     "go.tools.goreleaser.sha256": {
       "darwin/amd64": "164fce297e601ec00009e40d26858789b637335b5564bff2c99027b10d28bafe",
