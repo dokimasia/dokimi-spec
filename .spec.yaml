@@ -11,3 +11,4 @@ definition:
   files: [VERSION, "*.json", "schemas/*.json"]
   implementations:
     - {repo: dokimasia/dokimi-go, languages: [go]}
+    - {repo: dokimasia/dokimi-typescript, languages: [typescript]}
